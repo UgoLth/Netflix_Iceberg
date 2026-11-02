@@ -1,0 +1,5 @@
+import { FileText, MessageSquare, Users, Plus, Minus } from 'lucide-react';
+import { useState } from 'react';
+import type { Evidence } from '../content/netflix';
+import { SourceCitation } from './SourceCitation';
+export default function EvidenceCard({item,index,reading}:{item:Evidence;index:number;reading:boolean}) {const [open,setOpen]=useState(false);const Icon=item.icon==='memo'?FileText:item.icon==='language'?Users:MessageSquare;return <article className="evidence-card"><div className="evidence-number">0{index+1}<Icon size={23}/></div><p className="eyebrow">{item.subtitle}</p><h3>{item.title}</h3><p>{item.fact}</p><SourceCitation id={item.source}/><button className="evidence-toggle" aria-expanded={open||reading} aria-controls={`evidence-${index}`} onClick={()=>setOpen(!open)}>Lire l’analyse {open?<Minus size={17}/>:<Plus size={17}/>}</button><div id={`evidence-${index}`} className="evidence-detail" hidden={!open&&!reading}><p><strong>Interprétation.</strong> {item.interpretation}</p><p className="muted"><strong>Limite.</strong> {item.limit}</p></div></article>}
