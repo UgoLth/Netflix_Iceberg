@@ -24,6 +24,7 @@ Le build vérifie TypeScript et génère `dist/`. Ne pas ouvrir `dist/index.html
 ## Expérience et accessibilité
 
 - Une seule scène SVG : la caméra suit les positions réelles des chapitres. La ligne d’eau et l’iceberg évoluent ensemble ; la scène ne se réinitialise pas entre les niveaux.
+- Fluidité : translations et zoom par `transform`, transparence de la glace sur une couche séparée, léger lissage commun de la caméra et de l’eau. Les positions des chapitres sont mises en cache jusqu’à un changement de mise en page. Les grands filtres et les flous derrière les cartes ont été retirés du parcours animé pour limiter le travail de rendu.
 - Le défilement reste natif. Les liens permettent de rejoindre chaque niveau directement.
 - Les cartes s’ouvrent au clic ou au clavier ; leurs sources restent toujours accessibles.
 - La boussole donne les trois niveaux de Schein, sans profondeurs physiques ou proportions prétendument mesurées.
