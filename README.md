@@ -2,17 +2,22 @@
 
 Site pédagogique en français, React + TypeScript + Vite, consacré à la culture Netflix. Le parcours est une plongée continue dans les trois niveaux de Schein : artefacts à la surface, valeurs sous l’eau, présupposés dans les profondeurs. Les stations OCAI, concurrence et intrapreneuriat suivent la plongée.
 
+[Voir le site](https://ugolth.github.io/Netflix_Iceberg/) · [Dépôt GitHub](https://github.com/UgoLth/Netflix_Iceberg)
+
 ## Lancer le projet
 
 Prérequis : Node.js 22.12 ou supérieur (vérifié avec Node 22.20).
 
 ```powershell
-cd sous-la-surface
+git clone https://github.com/UgoLth/Netflix_Iceberg.git
+cd Netflix_Iceberg
 npm ci
 npm run dev
 ```
 
 Ouvrir l’adresse affichée par Vite. Si le port est occupé, Vite en choisit un autre.
+
+Dans l’espace de travail original, le projet se trouve déjà dans le dossier `sous-la-surface` : il n’est pas nécessaire de le cloner à nouveau.
 
 ```powershell
 npm run build
@@ -61,8 +66,16 @@ Le cours fourni est utilisé pour le cadre théorique (p. 17–18, 22–23, 28�
 
 - **Netlify** : répertoire de base `sous-la-surface` si le dépôt contient le dossier parent ; commande `npm run build` ; dossier publié `dist`.
 - **Vercel** : même répertoire de base ; framework Vite ; commande `npm run build` ; sortie `dist`.
-- **GitHub Pages** : compiler avec Node 22, puis publier `dist/` via un workflow Pages. `base: './'` permet les chemins relatifs sur un sous-répertoire.
+- **GitHub Pages** : le workflow `.github/workflows/pages.yml` installe les dépendances avec `npm ci`, vérifie TypeScript, compile puis publie `dist/`. Il s’exécute à chaque push sur `main`, ou manuellement depuis Actions. Le chemin de base est automatiquement lu dans la configuration Pages : aucun nom de dépôt n’est à coder dans Vite. Le favicon suit ce même chemin.
 - **Sites** : l’identité existante et le répertoire statique sont conservés dans `.openai/hosting.json`. La publication privée passe par le workflow du plugin ; ce fichier ne contient aucun secret.
+
+### Activer GitHub Pages
+
+Dans le dépôt GitHub : **Settings → Pages → Build and deployment → Source : GitHub Actions**. Le workflow doit être autorisé à déployer vers l’environnement `github-pages`. Après un push sur `main`, suivre **Actions → Publier sur GitHub Pages** ; le job `deploy` fournit l’URL finale.
+
+Seuls les fichiers du site sont versionnés dans ce dépôt. `node_modules/` et `dist/` sont reconstruits par le workflow. Le PDF du cours et le cahier des charges situés dans le dossier parent ne font pas partie du dépôt.
+
+Références techniques : [déploiement Vite sur GitHub Pages](https://vite.dev/guide/static-deploy.html#github-pages), [documentation GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
 
 ## Validation
 
